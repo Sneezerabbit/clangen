@@ -1778,6 +1778,7 @@
             "introspective",
             "newleaf",
             "you_blind",
+            "you_deaf",
             "they_blind"
         ],
         [
@@ -2681,6 +2682,20 @@
             "Oh, hey y_c! I was coming up with a song.",
             "Wanna hear it?",
             "No? Oh come on!"
+        ]
+    ],
+    "cool_51": [
+        [
+            "Any",
+            "silly",
+            "introspective",
+            "they_blind",
+            "you_blind"
+        ],
+        [
+            "Think there are other Clans out there?",
+            "Like, way far away. Not the Clans that we know.",
+            "Maybe there's even some Clans on the sun! Or the moon!"
         ]
     ],
     "cool_5_1": [
@@ -7634,7 +7649,8 @@
             "Any",
             "they_blind",
             "you_blind",
-            "they_deaf"
+            "they_deaf",
+            "you_deaf"
         ],
         [
             "Zzz...",

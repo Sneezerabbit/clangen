@@ -3150,7 +3150,8 @@
             "from_adopted_kit",
             "they_blind",
             "you_blind",
-            "they_deaf"
+            "they_deaf",
+            "you_deaf"
         ],
         [
             "[t_c walks over and flops down against your side.]",
