@@ -467,7 +467,7 @@ class TalkScreen(Screens):
 
             #the text for dialogue choices
             option = pygame_gui.elements.UITextBox(str(text),
-                                                            ui_scale(pygame.Rect((435, 430 + y_pos), (270, 30))),
+                                                            ui_scale(pygame.Rect((435, 428 + y_pos), (270, 35))),
                                                             object_id="#text_box_30_horizleft",
                                                             manager=MANAGER)
             self.text_choices[c] = option
@@ -713,9 +713,10 @@ class TalkScreen(Screens):
                 and "any" not in tags
                 and f"you_{your_status}" not in tags
                 and f"you_{(your_status).replace(' ', '_')}" not in tags
-                and "young elder" not in tags
+                and "they_young_elder" not in tags
                 and "you_young_elder" not in tags
                 and "no_kit" not in tags
+                and "no_newborn" not in tags
                 and "you_any" not in tags
                 and "they_app" not in tags
                 and "you_app" not in tags
@@ -724,13 +725,20 @@ class TalkScreen(Screens):
                 and "you_adult" not in tags
                 ):
                 continue
-            elif "young elder" in tags and cat.status == 'elder' and cat.moons >= 100:
+            elif "they_young_elder" in tags and cat.status == 'elder' and cat.moons >= 100:
                 continue
             elif "you_young_elder" in tags and you.status == 'elder' and you.moons >= 100:
                 continue
             elif "no_kit" in tags and (you.status in ['kitten', 'newborn'] or cat.status in ['kitten', 'newborn']):
                 continue
+            elif "no_newborn" in tags and (you.status == "newborn" or cat.status == "newborn"):
+                continue
             elif "newborn" in tags and "kitten" not in tags and you.moons != 0:
+                continue
+
+            if f"they_not_{cat.status.replace(' ', '')}" in tags:
+                continue
+            if f"you_not_{game.clan.your_cat.status.replace(' ', '')}" in tags:
                 continue
 
             if "they_adult" in tags and cat.status in [
@@ -1203,6 +1211,9 @@ class TalkScreen(Screens):
                         fam = True
                 if not fam:
                     continue
+
+            if "former_mate" in tags and cat.ID not in you.previous_mates:
+                continue
 
             # MURDER STUFF
             if game.clan.murdered != {}:
