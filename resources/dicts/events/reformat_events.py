@@ -355,7 +355,7 @@ def reformat(path):
                                  "NORIGHTEAR",
                                  "NOEAR", "SNAKE", "TOETRAP", "BURNPAWS", "BURNTAIL", "BURNBELLY", "BURNRUMP",
                                  "FROSTFACE",
-                                 "FROSTTAIL", "FROSTMITT", "FROSTSOCK", "TOE", "SNAKETWO"]
+                                 "FROSTTAIL", "FROSTMITT", "FROSTSOCK", "TOE", "SNAKETWO", "BLINDED", "RIGHTBLINDED", "LEFTBLINDED"]
                     for tag in event["tags"]:
                         if tag in scar_list:
                             info["scars"].append(tag)
@@ -402,7 +402,7 @@ def reformat(path):
                                  "NORIGHTEAR",
                                  "NOEAR", "SNAKE", "TOETRAP", "BURNPAWS", "BURNTAIL", "BURNBELLY", "BURNRUMP",
                                  "FROSTFACE",
-                                 "FROSTTAIL", "FROSTMITT", "FROSTSOCK", "TOE", "SNAKETWO"]
+                                 "FROSTTAIL", "FROSTMITT", "FROSTSOCK", "TOE", "SNAKETWO", "BLINDED", "RIGHTBLINDED", "LEFTBLINDED"]
                     for tag in event["tags"]:
                         if tag in scar_list:
                             info["scars"].append(tag)

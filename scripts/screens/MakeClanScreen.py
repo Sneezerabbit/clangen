@@ -2009,7 +2009,7 @@ class MakeClanScreen(Screens):
         self.tortiepattern=choice(pelts_tortie)
         self.vitiligo=choice(Pelt.vit) if random.randint(1,20) == 1 else None
         self.points=choice(Pelt.point_markings) if random.randint(1,5) == 1 else None
-        self.scars=[choice(Pelt.scars1 + Pelt.scars2 + Pelt.scars3)] if random.randint(1,10) == 1 else []
+        self.scars=[choice(Pelt.scars1 + Pelt.scars2 + Pelt.scars3 + Pelt.sightless)] if random.randint(1,10) == 1 else []
         self.tint=choice(["pink", "gray", "red", "orange", "black", "yellow", "purple", "blue","dilute","warmdilute","cooldilute"]) if random.randint(1,5) == 1 else None
         self.skin=choice(Pelt.skin_sprites)
         self.white_patches_tint=choice(["offwhite", "cream", "darkcream", "gray", "pink"]) if random.randint(1,5) == 1 else None
@@ -2037,10 +2037,10 @@ class MakeClanScreen(Screens):
             self.scars = ["NOPAW"]
         elif self.permanent_condition == "blind":
             if random.randint(0,10) == 1:
-                self.scars = ["BOTHBLIND"]
+                self.scars = ["BOTHBLIND","BLINDED"]
         elif self.permanent_condition == "one bad eye":
             if random.randint(0,10) == 1:
-                self.scars = [random.choice(["LEFTBLIND", "RIGHTBLIND", "BRIGHTHEART"])]
+                self.scars = [random.choice(["LEFTBLIND", "RIGHTBLIND", "BRIGHTHEART", "LEFTBLINDED", "RIGHTBLINDED"])]
         elif self.permanent_condition in ["deaf", "partial hearing loss"]:
             if random.randint(0,10):
                 self.scars = [random.choice(["LEFTEAR", "RIGHTEAR", "NOEAR"])]
@@ -2754,7 +2754,7 @@ class MakeClanScreen(Screens):
                     )
                     eye_y_pos += 40
             elif self.current_selection == "scar":
-                for scar in ["None"] + Pelt.scars1 + Pelt.scars2 + Pelt.scars3:
+                for scar in ["None"] + Pelt.scars1 + Pelt.scars2 + Pelt.scars3 + Pelt.sightless:
                     self.scar_buttons[str(scar)] = UIImageButton(
                     ui_scale(pygame.Rect((0, eye_y_pos), (34, 34))),
                     "",
@@ -3208,7 +3208,7 @@ class MakeClanScreen(Screens):
                         next_index = (current_index + num) % len(colours)
                         self.skin = colours[next_index]
                     elif self.current_selection == "scar":
-                        scars = ["None"] + Pelt.scars1 + Pelt.scars2 + Pelt.scars3
+                        scars = ["None"] + Pelt.scars1 + Pelt.scars2 + Pelt.scars3 + Pelt.sightless
                         current_index = scars.index(self.scars[-1]) if self.scars else 0
                         next_index = (current_index + num) % len(scars)
                         if not self.scar_buttons[scars[next_index]].is_enabled:
@@ -3282,12 +3282,15 @@ class MakeClanScreen(Screens):
                         else:
                             if "NOTAIL" in self.scars:
                                 self.scars.remove("NOTAIL")
-                        
-                        if self.permanent_condition != "blind":
-                            if "BOTHBLIND" in self.scars:
-                                self.scars.remove("BOTHBLIND")
+                        # sneezes sightless
+                        if self.permanent_condition == "blind":
+                            self.scars = ["BLINDED"]
+                        else:
+                            if "BLINDED" in self.scars:
+                                self.scars.remove("BLINDED")
+
                         if self.permanent_condition != "one bad eye":
-                            if any(scar in ["LEFTBLIND", "RIGHTBLIND", "BRIGHTHEART"] for scar in self.scars):
+                            if any(scar in ["LEFTBLIND", "RIGHTBLIND", "BRIGHTHEART", "LEFTBLINDED", "RIGHTBLINDED"] for scar in self.scars):
                                 self.scars = []
                     elif self.current_selection == "trait":
                         traits = ['troublesome', 'lonesome', 'impulsive', 'bullying', 'attention-seeker', 'charming', 'daring', 'noisy', 'nervous', 'quiet', 'insecure', 'daydreamer', 'sweet', 'polite', 'know-it-all', 'bossy', 'disciplined', 'patient', 'manipulative', 'secretive', 'rebellious', 'grumpy', 'passionate', 'honest', 'leader-like', 'smug']
@@ -3348,7 +3351,7 @@ class MakeClanScreen(Screens):
                     elif self.current_selection == "skin":
                         self.skin = random.choice(Pelt.skin_sprites)
                     elif self.current_selection == "scar":
-                        self.scars = [random.choice(Pelt.scars1 + Pelt.scars2 + Pelt.scars3)]
+                        self.scars = [random.choice(Pelt.scars1 + Pelt.scars2 + Pelt.scars3 + Pelt.sightless)]
                     elif self.current_selection == "accessory":
 
                         acc_list = (
@@ -3393,6 +3396,24 @@ class MakeClanScreen(Screens):
                         else:
                             if "NOTAIL" in self.scars:
                                 self.scars.remove("NOTAIL")
+                        #sneezes sightless
+                        if self.permanent_condition == "blind":
+                            self.scars = ["BLINDED"]
+                        else:
+                            if "BLINDED" in self.scars:
+                                self.scars.remove("BLINDED")
+                        if self.permanent_condition == 'one bad eye':
+                            self.scars = ["RIGHTBLINDED"]
+                        else:
+                            if "RIGHTBLINDED" in self.scars:
+                                self.scars.remove("RIGHTBLINDED")
+                        if self.permanent_condition == 'one bad eye':
+                            self.scars = ["LEFTBLINDED"]
+                        else:
+                            if "LEFTBLINDED" in self.scars:
+                                self.scars.remove("LEFTBLINDED")
+
+
                         if self.permanent_condition == "paralyzed":
                             self.paralyzed = True
                         else:
@@ -3580,10 +3601,10 @@ class MakeClanScreen(Screens):
                             else:
                                 if self.permanent_condition == "born without a tail":
                                     self.permanent_condition = None
-                            if i[0] == "BOTHBLIND":
+                            if i[0] == ["BOTHBLIND", "BLINDED"]:
                                 self.permanent_condition = "blind"
                                 self.paralyzed = False
-                            if i[0] in ["RIGHTBLIND", "LEFTBLIND", "BRIGHTHEART"]:
+                            if i[0] in ["RIGHTBLIND", "LEFTBLIND", "BRIGHTHEART", "RIGHTBLINDED", "LEFTBLINDED"]:
                                 self.permanent_condition = "one bad eye"
                                 self.paralyzed = False
                         self.update_sprite()
@@ -3636,9 +3657,9 @@ class MakeClanScreen(Screens):
                             
                             if i[0] != "blind":
                                 if "BOTHBLIND" in self.scars:
-                                    self.scars.remove("BOTHBLIND")
+                                    self.scars = []
                             if i[0] != "one bad eye":
-                                if any(scar in ["LEFTBLIND", "RIGHTBLIND", "BRIGHTHEART"] for scar in self.scars):
+                                if any(scar in ["LEFTBLIND", "RIGHTBLIND", "BRIGHTHEART", "LEFTBLINDED", "RIGHTBLINDED"] for scar in self.scars):
                                     self.scars = []
 
                             self.permanent_condition = i[0]
@@ -3713,11 +3734,26 @@ class MakeClanScreen(Screens):
                     self.your_cat.permanent_condition['born without a tail']["moons_until"] = 1
                     self.your_cat.permanent_condition['born without a tail']["moons_with"] = -1
                     self.your_cat.permanent_condition['born without a tail']['born_with'] = True
-                elif self.permanent_condition is not None and self.permanent_condition == "born without a leg" and "NOPAW" not in self.your_cat.pelt.scars:
+                if self.permanent_condition is not None and self.permanent_condition == "born without a leg" and "NOPAW" not in self.your_cat.pelt.scars:
                     self.your_cat.pelt.scars.append('NOPAW')
                     self.your_cat.permanent_condition['born without a leg']["moons_until"] = 1
                     self.your_cat.permanent_condition['born without a leg']["moons_with"] = -1
                     self.your_cat.permanent_condition['born without a leg']['born_with'] = True
+                if self.permanent_condition is not None and self.permanent_condition == "blind" and "BLINDED" not in self.your_cat.pelt.scars:
+                    self.your_cat.pelt.scars.append("BLINDED")
+                    self.your_cat.permanent_condition['blind']["moons_until"] = 1
+                    self.your_cat.permanent_condition['blind']["moons_with"] = -1
+                    self.your_cat.permanent_condition['blind']['born_with'] = True
+                if self.permanent_condition is not None and self.permanent_condition == "one bad eye" and "BLINDED" not in self.your_cat.pelt.scars:
+                    self.your_cat.pelt.scars.append("LEFTBLINDED")
+                    self.your_cat.permanent_condition['one bad eye']["moons_until"] = 1
+                    self.your_cat.permanent_condition['one bad eye']["moons_with"] = -1
+                    self.your_cat.permanent_condition['one bad eye']['born_with'] = True
+                elif self.permanent_condition is not None and self.permanent_condition == "one bad eye" and "BLINDED" not in self.your_cat.pelt.scars:
+                    self.your_cat.pelt.scars.append("RIGHTBLINDED")
+                    self.your_cat.permanent_condition['one bad eye']["moons_until"] = 1
+                    self.your_cat.permanent_condition['one bad eye']["moons_with"] = -1
+                    self.your_cat.permanent_condition['one bad eye']['born_with'] = True
                 self.your_cat.pelt.accessories = self.accessories
                 self.your_cat.pelt.inventory = self.accessories
                 self.your_cat.personality = Personality(trait=self.personality, kit_trait=True)
@@ -3887,7 +3923,7 @@ class MakeClanScreen(Screens):
                     else:
                         self.scar_buttons[i[0]].disable()
                 if self.paralyzed is True:
-                    for scar in ["BRIGHTHEART", "LEFTBLIND", "RIGHTBLIND", "BOTHBLIND", "NOPAW", "NOTAIL"]:
+                    for scar in ["BRIGHTHEART", "LEFTBLIND", "RIGHTBLIND", "BOTHBLIND", "NOPAW", "NOTAIL", "BLINDED", "LEFTBLINDED", "RIGHTBLINDED"]:
                         self.scar_buttons[scar].disable()
             for i in self.accessory_buttons.items():
                 if i[0] == "None" and not self.accessories:

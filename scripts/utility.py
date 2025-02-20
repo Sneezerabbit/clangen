@@ -1043,6 +1043,15 @@ def create_new_cat(
                     new_cat.pelt.scars.append("NOPAW")
                 elif chosen_condition in ["lost their tail", "born without a tail"]:
                     new_cat.pelt.scars.append("NOTAIL")
+                #sneezes sightless
+                if chosen_condition in ["blind"]:
+                    new_cat.pelt.scars.append("BLINDED")
+                elif chosen_condition in ["one bad eye"]:
+                    chance_eyes = randint(0,1)
+                    if chance_eyes == 0:
+                        new_cat.pelt.scars.append("RIGHTBLINDED")
+                    else:
+                        new_cat.pelt.scars.append("LEFTBLINDED")
 
         if outside:
             new_cat.outside = True
@@ -2860,6 +2869,12 @@ def generate_sprite(
                     new_sprite.blit(
                         sprites.sprites["scars" + scar + cat_sprite], (0, 0)
                     )
+                #sneezes sightless
+                if scar in cat.pelt.sightless:
+                    new_sprite.blit(
+                        sprites.sprites["sightless" + scar + cat_sprite],(0, 0)
+                    )
+
 
         # draw line art
         if game.settings["shaders"] and not dead:

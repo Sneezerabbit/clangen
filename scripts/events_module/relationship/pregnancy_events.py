@@ -829,6 +829,16 @@ class Pregnancy_Events:
                         kit.pelt.scars.append("NOPAW")
                     elif kit.permanent_condition[condition] == "born without a tail":
                         kit.pelt.scars.append("NOTAIL")
+                    #sneezes sightless
+                    if kit.permanent_condition[condition] == "blind":
+                        kit.pelt.scars.append("BLINDED")
+                    elif kit.permanent_condition[condition] == "one bad eye":
+                        chance_eyes = randint(0,1)
+                        if chance_eyes == 0:
+                            kit.pelt.scars.append("RIGHTBLINDED")
+                        else:
+                            kit.pelt.scars.append("LEFTBLINDED")
+                            
                 Condition_Events.handle_already_disabled(kit)
 
             # create and update relationships
