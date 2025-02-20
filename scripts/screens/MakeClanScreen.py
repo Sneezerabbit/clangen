@@ -3292,6 +3292,7 @@ class MakeClanScreen(Screens):
                         if self.permanent_condition != "one bad eye":
                             if any(scar in ["LEFTBLIND", "RIGHTBLIND", "BRIGHTHEART", "LEFTBLINDED", "RIGHTBLINDED"] for scar in self.scars):
                                 self.scars = []
+                                
                     elif self.current_selection == "trait":
                         traits = ['troublesome', 'lonesome', 'impulsive', 'bullying', 'attention-seeker', 'charming', 'daring', 'noisy', 'nervous', 'quiet', 'insecure', 'daydreamer', 'sweet', 'polite', 'know-it-all', 'bossy', 'disciplined', 'patient', 'manipulative', 'secretive', 'rebellious', 'grumpy', 'passionate', 'honest', 'leader-like', 'smug']
                         current_index = traits.index(self.personality)
@@ -3607,6 +3608,8 @@ class MakeClanScreen(Screens):
                             if i[0] in ["RIGHTBLIND", "LEFTBLIND", "BRIGHTHEART", "RIGHTBLINDED", "LEFTBLINDED"]:
                                 self.permanent_condition = "one bad eye"
                                 self.paralyzed = False
+
+                    
                         self.update_sprite()
                         self.update_disabled_buttons()
                 for i in self.accessory_buttons.items():
@@ -3636,6 +3639,12 @@ class MakeClanScreen(Screens):
                                 self.scars.remove("LEFTBLIND")
                             if "RIGHTBLIND" in self.scars:
                                 self.scars.remove("RIGHTBLIND")
+                            if "BLINDED" in self.scars:
+                                self.scars.remove("BLINDED")
+                            if "LEFTBLINDED" in self.scars:
+                                self.scars.remove("LEFTBLINDED")
+                            if "RIGHTBLINDED" in self.scars:
+                                self.scars.remove("RIGHTBLINDED")
                             self.paralyzed = False
                         else:
                             if i[0] != "paralyzed":
