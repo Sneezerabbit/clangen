@@ -77,6 +77,9 @@ class Pelt:
     # "special" scars that could only happen in a special event
     scars3 = ["SNAKE", "TOETRAP", "BURNPAWS", "BURNTAIL", "BURNBELLY", "BURNRUMP", "FROSTFACE", "FROSTTAIL",
               "FROSTMITT", "FROSTSOCK", "TOE", "SNAKETWO"]
+    
+    # sneeze sightless
+    sightless = ["RIGHTBLINDED", "LEFTBLINDED", "BLINDED"]
 
     # make sure to add plural and singular forms of new accs to acc_display.json so that they will display nicely
     plant_accessories = ['FERNS', 'BLEEDING HEARTS2', 'BLACK WHEAT', 'LARGE DEATHBERRY', 'BERRIES', 'GOLD FERNS', 'ORANGE POPPY', 'BULB YELLOW', 'NETTLE', 'HERBS', 'CATTAIL', 'LILY OF THE VALLEY', 'SNAPDRAGON', 'ACORN2', 'BULB PINK', 'BULB BLUE', 'DRY LAURELS', 'DAISY', 'HOLLY', 'BULB WHITE', 'GORSE', 'LILYPAD', 'BLUEBELLS', 'BLUE BERRIES', 'MAPLE LEAF', 'VINE', 'LAUREL', 'RASPBERRY', 'BULB ORANGE', 'OAK LEAVES', 'FLOWER MOSS', 'CYAN POPPY', 'WHEAT', 'CHERRY2', 'LAVENDER', 'SHELL PACK', 'PINK POPPY', 'POPPY', 'CLOVER2', 'DRY NETTLES', 'RYE STALK', 'MOSS2', 'MAPLE SEED', 'FORGET ME NOTS', 'PETALS', 'MUSHROOMS', 'CLOVER', 'CATMINT', 'JUNIPER', 'WHITE POPPY', 'HEATHER', 'DRY HERBS', 'PINECONE', 'SMALL DEATHBERRY', 'DRY CATMINT', 'CLOVERS'
@@ -706,11 +709,34 @@ class Pelt:
         if scar_choice == 1:
             self.scars.append(choice([
                 choice(Pelt.scars1),
-                choice(Pelt.scars3)
+                choice(Pelt.scars3),
+                choice(Pelt.sightless)
             ]))
 
         if 'NOTAIL' in self.scars and 'HALFTAIL' in self.scars:
             self.scars.remove('HALFTAIL')
+       #Sneezes Sightless
+        if "RIGHTBLINDED" in self.scars and "LEFTBLINDED" in self.scars:
+            self.scars.remove("LEFTBLINDED")
+        if "RIGHTBLINDED" in self.scars and "LEFTBLIND" in self.scars:
+            self.scars.remove("LEFTBLINDED")
+        if "LEFTBLINDED" in self.scars and "RIGHTBLINDED" in self.scars:
+            self.scars.remove("RIGHTBLINDED")
+        if "LEFTBLINDED" in self.scars and "RIGHTBLIND" in self.scars:
+            self.scars.remove("RIGHTBLIND")
+      
+        if "BLINDED" in self.scars and "BOTHBLIND":
+            self.scars.remove("BOTHBLIND")
+        if "BLINDED" in self.scars and "RIGHTBLINDED":
+            self.scars.remove("RIGHTBLINDED")
+        if "BLINDED" in self.scars and "RIGHTBLIND":
+            self.scars.remove("RIGHTBLIND")
+        if "BLINDED" in self.scars and "LEFTBLINDED":
+            self.scars.remove("LEFTBLINDED")
+        if "BLINDED" in self.scars and "LEFTBLINDED":
+            self.scars.remove("LEFTBLINDED")
+
+   
 
     def init_accessories(self, age):
         if age == "newborn":

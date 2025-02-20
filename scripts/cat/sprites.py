@@ -145,7 +145,10 @@ class Sprites:
             'superartsi',
 
             #coffee
-            'coffee','eragona','crowns','springwinter','raincoats','chimes','moipa','moipa2','pocky1','misc_acc','reign1'
+            'coffee','eragona','crowns','springwinter','raincoats','chimes','moipa','moipa2','pocky1','misc_acc','reign1',
+
+            #Sneeze
+            'sightless'
 
         ]:
             if 'lineart' in x and game.config['fun']['april_fools']:
@@ -450,6 +453,17 @@ class Sprites:
         for row, missing_parts in enumerate(missing_parts_data):
             for col, missing_part in enumerate(missing_parts):
                 self.make_group('missingscars', (col, row), f'scars{missing_part}')
+
+        #Sneeze's Blind
+        sightless_data = [ 
+            ["RIGHTBLINDED", "LEFTBLINDED", "BLINDED"]
+            ]
+        
+        for row, sightless in enumerate(sightless_data):
+            for col, sightless in enumerate(sightless):
+                self.make_group('sightless', (col, row), f'sightless{sightless}')
+
+    
 
         # accessories
         #to my beloved modders, im very sorry for reordering everything <333 -clay

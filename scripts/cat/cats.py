@@ -2402,6 +2402,16 @@ class Cat:
             cat.pelt.scars.append("NOPAW")
         elif new_condition == "born without a tail":
             cat.pelt.scars.append("NOTAIL")
+        #sneezes sightless
+        if new_condition == "blind":
+            cat.pelt.scars.append("BLINDED")
+        if new_condition == "one bad eye":
+            chance_eyes = randint(0,1)
+            if chance_eyes == 0:
+                cat.pelt.scars.append("RIGHTBLINDED")
+            else:
+                cat.pelt.scars.append("LEFTBLINDED")
+
 
         self.get_permanent_condition(new_condition, born_with=True)
 
@@ -4088,6 +4098,15 @@ def create_example_cats():
                     game.choose_cats[a].pelt.scars.append('NOPAW')
                 elif chosen_condition in ['lost their tail', 'born without a tail']:
                     game.choose_cats[a].pelt.scars.append("NOTAIL")
+                #sneezes sightless
+                if chosen_condition in ['blind']:
+                    game.choose_cats[a].pelt.scars.append("BLINDED")
+                elif chosen_condition in ['one bad eye']:
+                    chance_eyes = randint(0,1)
+                    if chance_eyes == 0:
+                        game.choose_cats[a].pelt.scars.append("RIGHTBLINDED")
+                    else:
+                        game.choose_cats[a].pelt.scars.append("LEFTBLINDED")
         #update_sprite(game.choose_cats[a])
     
 
