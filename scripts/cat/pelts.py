@@ -725,8 +725,6 @@ class Pelt:
         if "LEFTBLINDED" in self.scars and "RIGHTBLIND" in self.scars:
             self.scars.remove("RIGHTBLIND")
       
-        if "BLINDED" in self.scars and "BOTHBLIND":
-            self.scars.remove("BOTHBLIND")
         if "BLINDED" in self.scars and "RIGHTBLINDED":
             self.scars.remove("RIGHTBLINDED")
         if "BLINDED" in self.scars and "RIGHTBLIND":
