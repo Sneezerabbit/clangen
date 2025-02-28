@@ -445,9 +445,9 @@ class Condition_Events:
             "RIGHTBLIND": ["one bad eye", "failing eyesight"],
             "BOTHBLIND": ["failing eyesight", "blind"],
             #sneezes sightless
-            "BLINDED": ["blind"],
-            "LEFTBLINDED": ["one bad eye"],
-            "RIGHTBLINDED": ["one bad eye"],
+            "BLINDED": ["failing eyesight","blind"],
+            "LEFTBLINDED": ["failing eyesight","one bad eye"],
+            "RIGHTBLINDED": ["failing eyesight","one bad eye"],
             "MANLEG": ["weak leg", "twisted leg"],
             "RATBITE": ["weak leg"],
             "LEGBITE": ["weak leg"],
@@ -460,7 +460,6 @@ class Condition_Events:
             "paralyzed",
             "raspy lungs",
             "wasting disease",
-            "failing eyesight",
             "partial hearing loss",
             "deaf",
             "constant joint pain",
@@ -514,6 +513,8 @@ class Condition_Events:
 
         if got_condition is True:
             return perm_condition
+        
+    
 
     # ---------------------------------------------------------------------------- #
     #                               helper functions                               #

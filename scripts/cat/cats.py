@@ -2400,12 +2400,12 @@ class Cat:
 
         if new_condition == "born without a leg":
             cat.pelt.scars.append("NOPAW")
-        elif new_condition == "born without a tail":
+        if new_condition == "born without a tail":
             cat.pelt.scars.append("NOTAIL")
         #sneezes sightless
         if new_condition == "blind":
             cat.pelt.scars.append("BLINDED")
-        if new_condition == "one bad eye":
+        elif new_condition == "one bad eye":
             chance_eyes = randint(0,1)
             if chance_eyes == 0:
                 cat.pelt.scars.append("RIGHTBLINDED")
@@ -2422,7 +2422,6 @@ class Cat:
                 f"WARNING: {name} is not in the permanent conditions collection.",
             )
             return
-
         if "blind" in self.permanent_condition and name == "failing eyesight":
             return
         if "deaf" in self.permanent_condition and name == "partial hearing loss":
@@ -4093,11 +4092,12 @@ def create_example_cats():
                 # assign scars
                 if chosen_condition in ['lost a leg', 'born without a leg']:
                     game.choose_cats[a].pelt.scars.append('NOPAW')
-                elif chosen_condition in ['lost their tail', 'born without a tail']:
+                if chosen_condition in ['lost their tail', 'born without a tail']:
                     game.choose_cats[a].pelt.scars.append("NOTAIL")
                 #sneezes sightless
                 if chosen_condition in ['blind']:
                     game.choose_cats[a].pelt.scars.append("BLINDED")
+
                 elif chosen_condition in ['one bad eye']:
                     chance_eyes = randint(0,1)
                     if chance_eyes == 0:

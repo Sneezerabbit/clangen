@@ -2,7 +2,7 @@ import random
 from random import choice, randint
 
 import ujson
-
+import random
 from scripts.cat.cats import Cat
 from scripts.cat.history import History
 from scripts.cat.names import names, Name
@@ -833,7 +833,7 @@ class Pregnancy_Events:
                     if kit.permanent_condition[condition] == "blind":
                         kit.pelt.scars.append("BLINDED")
                     elif kit.permanent_condition[condition] == "one bad eye":
-                        chance_eyes = randint(0,1)
+                        chance_eyes = random.randint(0,1)
                         if chance_eyes == 0:
                             kit.pelt.scars.append("RIGHTBLINDED")
                         else:

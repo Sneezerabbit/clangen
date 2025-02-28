@@ -1007,8 +1007,8 @@ def create_new_cat(
                 game.config["cat_generation"]["base_permanent_condition"] / 11.25
             )
         else:
-            chance = game.config["cat_generation"]["base_permanent_condition"] + 10
-        if not int(random() * chance):
+            chance = game.config["cat_generation"]["base_permanent_condition"] + 1
+        if not int(random()* chance):
             possible_conditions = []
             for condition in PERMANENT:
                 if (kit or litter) and PERMANENT[condition]["congenital"] not in [
@@ -1044,11 +1044,12 @@ def create_new_cat(
                 # assign scars
                 if chosen_condition in ["lost a leg", "born without a leg"]:
                     new_cat.pelt.scars.append("NOPAW")
-                elif chosen_condition in ["lost their tail", "born without a tail"]:
+                if chosen_condition in ["lost their tail", "born without a tail"]:
                     new_cat.pelt.scars.append("NOTAIL")
                 #sneezes sightless
                 if chosen_condition in ["blind"]:
                     new_cat.pelt.scars.append("BLINDED")
+                    
                 elif chosen_condition in ["one bad eye"]:
                     chance_eyes = randint(0,1)
                     if chance_eyes == 0:

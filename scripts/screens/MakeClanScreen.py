@@ -3287,9 +3287,9 @@ class MakeClanScreen(Screens):
                         # sneezes sightless
                         if self.permanent_condition == "blind":
                             self.scars = ["BLINDED"]
-                        else:
-                            if "BLINDED" in self.scars:
-                                self.scars.remove("BLINDED")
+
+                        if self.scars == ["BLINDED"]:
+                            self.permanent_condition = "blind"
 
                         if self.permanent_condition != "one bad eye":
                             if any(scar in ["LEFTBLIND", "RIGHTBLIND", "BRIGHTHEART", "LEFTBLINDED", "RIGHTBLINDED"] for scar in self.scars):
@@ -3667,7 +3667,7 @@ class MakeClanScreen(Screens):
                                     self.scars.remove("NOTAIL")
                             
                             if i[0] != "blind":
-                                if "BOTHBLIND" in self.scars:
+                                if any(scar in ["BOTHBLIND","BLINDED"] for scar in self.scars):
                                     self.scars = []
                             if i[0] != "one bad eye":
                                 if any(scar in ["LEFTBLIND", "RIGHTBLIND", "BRIGHTHEART", "LEFTBLINDED", "RIGHTBLINDED"] for scar in self.scars):

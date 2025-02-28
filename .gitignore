@@ -182,3 +182,5 @@ version.ini
 *.xml
 .vs/
 lgvenv/
+resources/game_config.json
+resources/game_config.json

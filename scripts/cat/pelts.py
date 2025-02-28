@@ -737,17 +737,6 @@ class Pelt:
             self.scars.remove("RIGHTBLINDED")
         if "LEFTBLINDED" in self.scars and "RIGHTBLIND" in self.scars:
             self.scars.remove("RIGHTBLIND")
-      
-        if "BLINDED" in self.scars and "RIGHTBLINDED":
-            self.scars.remove("RIGHTBLINDED")
-        if "BLINDED" in self.scars and "RIGHTBLIND":
-            self.scars.remove("RIGHTBLIND")
-        if "BLINDED" in self.scars and "LEFTBLINDED":
-            self.scars.remove("LEFTBLINDED")
-        if "BLINDED" in self.scars and "LEFTBLINDED":
-            self.scars.remove("LEFTBLINDED")
-
-   
 
     def init_accessories(self, age):
         if age == "newborn":
@@ -1163,7 +1152,10 @@ class Pelt:
                 "NOPAW": "three legs",
                 "NOLEFTEAR": "a missing ear",
                 "NORIGHTEAR": "a missing ear",
-                "NOEAR": "no ears"
+                "NOEAR": "no ears",
+                "BLINDED": "blind",
+                "RIGHTBLINDED": "one blind eye",
+                "LEFTBLINDED": "one blind eye"
             }
 
             additional_details = []
